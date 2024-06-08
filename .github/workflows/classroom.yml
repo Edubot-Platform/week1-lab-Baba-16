@@ -1,0 +1,34 @@
+name: Autograding Tests
+'on':
+- push
+- repository_dispatch
+permissions:
+  checks: write
+  actions: read
+  contents: read
+jobs:
+  run-autograding-tests:
+    runs-on: ubuntu-latest
+    if: github.actor != 'github-classroom[bot]'
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+    - name: Program 1
+      id: program-1
+      uses: classroom-resources/autograding-io-grader@v1
+      with:
+        test-name: Program 1
+        setup-command: javac MyInfo.java
+        command: java MyInfo.java
+        input: John, Doe, 25, New York
+        expected-output: |-
+          My Name is John Doe.
+          I am 25 years old and was born in New York.
+        comparison-method: contains
+        timeout: 10
+    - name: Autograding Reporter
+      uses: classroom-resources/autograding-grading-reporter@v1
+      env:
+        PROGRAM-1_RESULTS: "${{steps.program-1.outputs.result}}"
+      with:
+        runners: program-1
