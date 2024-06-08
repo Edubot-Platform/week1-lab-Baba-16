@@ -13,22 +13,22 @@ jobs:
     steps:
     - name: Checkout code
       uses: actions/checkout@v4
-    - name: Program 1
-      id: program-1
+    - name: Program 1 Test 1
+      id: program-1-test-1
       uses: classroom-resources/autograding-io-grader@v1
       with:
-        test-name: Program 1
+        test-name: Program 1 Test 1
         setup-command: javac MyInfo.java
-        command: java MyInfo.java
-        input: John, Doe, 25, New York
+        command: java MyInfo
+        input: ''
         expected-output: |-
-          My Name is John Doe.
-          I am 25 years old and was born in New York.
+          My Name is Mary Jones.
+          I am 21 years old and was born in Cleveland.
         comparison-method: contains
         timeout: 10
     - name: Autograding Reporter
       uses: classroom-resources/autograding-grading-reporter@v1
       env:
-        PROGRAM-1_RESULTS: "${{steps.program-1.outputs.result}}"
+        PROGRAM-1-TEST-1_RESULTS: "${{steps.program-1-test-1.outputs.result}}"
       with:
-        runners: program-1
+        runners: program-1-test-1
