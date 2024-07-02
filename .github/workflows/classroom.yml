@@ -69,7 +69,7 @@ jobs:
         setup-command: javac BirthDay.java
         command: java BirthDay
         input: |-
-          6,15,1990
+          Mary,6,15,1990
           John,09,20,1985
         expected-output: |-
           In the USA my birthday is: 6/15/1990
@@ -86,7 +86,7 @@ jobs:
         setup-command: javac BirthDay.java
         command: java BirthDay
         input: |-
-          3,7,1980
+          Mary,3,7,1980
           Tom,6,1,1988
         expected-output: |-
           In the USA my birthday is: 3/7/1980
